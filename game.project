@@ -1,6 +1,7 @@
 [project]
 title = CraftSprint.io
 version = 1.0.0
+dependencies = 
 
 [display]
 width = 960
