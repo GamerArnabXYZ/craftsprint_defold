@@ -1,8 +1,16 @@
 name: "default"
 instances {
-  id: "runner_controller"
-  components {
-    id: "script"
-    component: "/main/runner.script"
+  id: "runner_game_object"
+  prototype: "/main/runner.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
   }
 }
