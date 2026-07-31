@@ -1,0 +1,18 @@
+[project]
+title = CraftSprint.io
+version = 1.0.0
+
+[display]
+width = 960
+height = 540
+high_dpi = 1
+
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[input]
+game_binding = /main/game.input_bindingc
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest

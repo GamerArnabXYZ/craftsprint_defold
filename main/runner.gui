@@ -1,0 +1,73 @@
+script: "/main/runner.gui_script"
+nodes {
+  position {
+    x: 480.0
+    y: 270.0
+    z: -1.0
+  }
+  size {
+    x: 960.0
+    y: 540.0
+  }
+  color {
+    x: 0.53
+    y: 0.81
+    z: 0.98
+  }
+  type: TYPE_BOX
+  id: "background"
+}
+nodes {
+  position {
+    x: 480.0
+    y: 50.0
+    z: 0.0
+  }
+  size {
+    x: 960.0
+    y: 100.0
+  }
+  color {
+    x: 0.3
+    y: 0.65
+    z: 0.25
+  }
+  type: TYPE_BOX
+  id: "ground"
+}
+nodes {
+  position {
+    x: 150.0
+    y: 130.0
+    z: 1.0
+  }
+  size {
+    x: 50.0
+    y: 60.0
+  }
+  color {
+    x: 0.85
+    y: 0.25
+    z: 0.2
+  }
+  type: TYPE_BOX
+  id: "player"
+}
+nodes {
+  position {
+    x: 1000.0
+    y: 125.0
+    z: 1.0
+  }
+  size {
+    x: 40.0
+    y: 50.0
+  }
+  color {
+    x: 0.1
+    y: 0.7
+    z: 0.2
+  }
+  type: TYPE_BOX
+  id: "obstacle"
+}
