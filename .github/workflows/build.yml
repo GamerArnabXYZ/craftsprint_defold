@@ -26,9 +26,13 @@ jobs:
           mkdir -p tools
           curl -L -o tools/bob.jar https://github.com/defold/defold/releases/download/1.9.0/bob.jar
 
+      - name: Resolve Builtins and Libraries
+        run: |
+          java -jar tools/bob.jar --platform js-web resolve
+
       - name: Build and Bundle WebGL
         run: |
-          java -jar tools/bob.jar --root . --platform js-web --archive resolve build bundle --bundle-output build/web
+          java -jar tools/bob.jar --platform js-web --archive build bundle --bundle-output build/web
 
       - name: Upload WebGL Artifact
         uses: actions/upload-artifact@v4
