@@ -26,10 +26,18 @@ jobs:
           mkdir -p tools
           curl -L -o tools/bob.jar https://github.com/defold/defold/releases/download/1.9.0/bob.jar
 
-      - name: Resolve and Build
-        run: |
-          java -jar tools/bob.jar --archive -p js-web --settings game.project resolve distclean build
+      # Magic Fix: Resolve -> Build -> Bundle in proper sequence with --root .
+      - name: Resolve Dependencies
+        run: java -jar tools/bob.jar --root . --settings game.project -p js-web resolve
 
-      - name: Bundle WebGL
-        run: |
-          java -jar tools/bob.jar --archive -p js-web --settings game.project bundle --bundle-output build/web
+      - name: Compile and Archive
+        run: java -jar tools/bob.jar --root . --settings game.project -p js-web --archive build
+
+      - name: Bundle WebGL App
+        run: java -jar tools/bob.jar --root . --settings game.project -p js-web --archive bundle --bundle-output build/web
+
+      - name: Upload WebGL Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CraftSprint-WebGL
+          path: build/web/
