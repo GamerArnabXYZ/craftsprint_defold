@@ -1,4 +1,4 @@
-name: CraftSprint.io Build (WebGL & APK)
+name: CraftSprint.io Build (WebGL)
 
 on:
   push:
@@ -15,17 +15,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4
+      - name: Build Defold WebGL
+        uses: defold/doc@v1
+        # Ya direct official bob action:
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          args: --archive --platform js-web resolve build bundle --bundle-output build/web
 
-      - name: Download Defold bob.jar
-        run: |
-          mkdir -p tools
-          curl -L -o tools/bob.jar https://github.com/defold/defold/releases/download/1.9.0/bob.jar
-
-      - name: Build WebGL
-        run: |
-          java -jar tools/bob.jar --archive --platform js-web --settings game.project build bundle --bundle-output build/web
+      - name: Upload WebGL Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CraftSprint-WebGL
+          path: build/web/
