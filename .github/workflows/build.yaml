@@ -28,10 +28,4 @@ jobs:
 
       - name: Build and Bundle WebGL
         run: |
-          java -jar tools/bob.jar --root . --archive --platform js-web resolve distclean build bundle --bundle-output build/web
-
-      - name: Upload WebGL Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: CraftSprint-WebGL
-          path: build/web/
+          java -jar tools/bob.jar --root . --settings game.project -p js-web resolve distclean build --archive bundle --bundle-output build/web
