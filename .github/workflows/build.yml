@@ -26,6 +26,10 @@ jobs:
           mkdir -p tools
           curl -L -o tools/bob.jar https://github.com/defold/defold/releases/download/1.9.0/bob.jar
 
-      - name: Build and Bundle WebGL
+      - name: Resolve and Build
         run: |
-          java -jar tools/bob.jar --archive -p js-web resolve distclean build bundle --bundle-output build/web
+          java -jar tools/bob.jar --archive -p js-web --settings game.project resolve distclean build
+
+      - name: Bundle WebGL
+        run: |
+          java -jar tools/bob.jar --archive -p js-web --settings game.project bundle --bundle-output build/web
