@@ -8,10 +8,10 @@ height = 540
 high_dpi = 1
 
 [bootstrap]
-main_collection = /main/main.collectionc
+main_collection = /main/main.collection
 
 [input]
-game_binding = /main/game.input_bindingc
+game_binding = /main/game.input_binding
 
 [graphics]
 default_texture_min_filter = nearest
