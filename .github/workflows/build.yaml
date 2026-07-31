@@ -12,43 +12,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Repository Source Code Download
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Java 17 Setup (Defold bob.jar ke liye)
       - name: Setup Java JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Defold CLI Compiler (bob.jar) Download
       - name: Download Defold bob.jar
         run: |
           mkdir -p tools
           curl -L -o tools/bob.jar https://github.com/defold/defold/releases/download/1.9.0/bob.jar
 
-      # 4. WebGL Bundle Compile
-      - name: Build WebGL Target
+      - name: Resolve Dependencies & Build WebGL
         run: |
-          java -jar tools/bob.jar --archive --platform js-web resolve distclean build bundle --bundle-output build/web
+          java -jar tools/bob.jar --archive --platform js-web --settings game.project resolve
+          java -jar tools/bob.jar --archive --platform js-web --settings game.project build bundle --bundle-output build/web
 
-      # 5. Android APK Bundle Compile
-      - name: Build Android APK Target
-        run: |
-          java -jar tools/bob.jar --archive --platform armv7-android resolve build bundle --bundle-output build/android
-
-      # 6. WebGL Zip Artifact Save
       - name: Upload WebGL Artifact
         uses: actions/upload-artifact@v4
         with:
           name: CraftSprint-WebGL
           path: build/web/
-
-      # 7. Android APK Artifact Save
-      - name: Upload Android APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: CraftSprint-Android-APK
-          path: build/android/*/*.apk
