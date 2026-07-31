@@ -15,11 +15,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build Defold WebGL
-        uses: defold/doc@v1
-        # Ya direct official bob action:
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
         with:
-          args: --archive --platform js-web resolve build bundle --bundle-output build/web
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Download Defold bob.jar
+        run: |
+          mkdir -p tools
+          curl -L -o tools/bob.jar https://github.com/defold/defold/releases/download/1.9.0/bob.jar
+
+      - name: Build WebGL
+        run: |
+          java -jar tools/bob.jar --root . --project-output build/default --archive -p js-web resolve build bundle --bundle-output build/web
 
       - name: Upload WebGL Artifact
         uses: actions/upload-artifact@v4
